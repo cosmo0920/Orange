@@ -8,7 +8,7 @@
 .bundle
 
 # Ignore bash script
-comsumer-secret.bash
+consumer-secret.bash
 
 # Ignore the default SQLite database.
 db/*.sqlite3
