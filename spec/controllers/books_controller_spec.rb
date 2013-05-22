@@ -3,10 +3,11 @@ require 'spec_helper'
 describe BooksController do
 
   describe "GET 'index'" do
-    it "returns http success" do
+		before do
       get 'index'
-      response.should be_success
-    end
+		end
+
+    it { response.should be_success }
   end
 
 end
