@@ -1,9 +1,10 @@
 require 'spec_helper'
 
 describe BooksController do
-	it "adafsdafsdfasdf" do
+	before do
 		FactoryGirl.create(:book)
 		visit books_path
-		binding.pry
 	end
+
+	it { page.should have_content 'Books#index' }
 end
