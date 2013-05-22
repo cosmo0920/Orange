@@ -33,6 +33,7 @@ gem 'twitter'
 gem 'jbuilder', '~> 1.0.1'
 gem 'rails-i18n'
 gem 'twitter-bootstrap-rails'
+gem 'kaminari'
 
 #group :doc do
 #  # bundle exec rake doc:rails generates the API under doc/api.
