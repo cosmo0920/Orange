@@ -2,5 +2,8 @@
 
 FactoryGirl.define do
   factory :book do
+		title { Forgery::Basic.text }
+		isbn { Forgery::Basic.text }
+		description { Forgery::Basic.text }
   end
 end
