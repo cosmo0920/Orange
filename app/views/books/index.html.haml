@@ -1,2 +1,4 @@
-%h1 Books#index
-%p Find me in app/views/books/index.html.haml
+%table
+  - @books.each do |book|
+    %tr
+      %td=book.title
