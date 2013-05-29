@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe Book do
-	describe ".page" do
+	describe "pagination" do
 		before { FactoryGirl.create_list(:book,12) }
 
 		context "page 1" do
