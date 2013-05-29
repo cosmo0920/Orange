@@ -1,6 +1,5 @@
 class Book < ActiveRecord::Base
   paginates_per 10
-  #ISBN validator
   validate :length_isbn
 
   def length_isbn
