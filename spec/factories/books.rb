@@ -3,7 +3,7 @@
 FactoryGirl.define do
   factory :book do
 		title { Forgery::Basic.text }
-		isbn { Forgery::Basic.text(:exactly => 13) }
+		isbn { "9784274068669" }
 		description { Forgery::Basic.text }
   end
 end

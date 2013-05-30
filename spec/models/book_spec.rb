@@ -15,23 +15,23 @@ describe Book do
 		end
 	end
 
-  describe "length_isbn" do
-    context "Valid ISBN13 Length" do
-		  let(:valid_isbn13_length) { FactoryGirl.attributes_for(:book, isbn: Forgery::Basic.text(exactly: 13)) }
-		  subject { Book.new(valid_isbn13_length) }
-      it { subject.valid?.should be_true }
+  describe "isbn_is_appropriate" do
+    context "valid ISBN13" do
+		  let(:book) { FactoryGirl.build(:book, isbn: "9784797363821") }
+		  subject { book }
+      it { subject.should be_valid }
     end
 
-    context "Valid ISBN10 Length" do
-		  let(:valid_isbn10_length) { FactoryGirl.attributes_for(:book, isbn: Forgery::Basic.text(exactly: 10)) }
-		  subject { Book.new(valid_isbn10_length) }
-      it { subject.valid?.should be_true }
+    context "vaild ISBN10" do
+		  let(:book) { FactoryGirl.build(:book, isbn: "4894717115") }
+		  subject { book }
+      it { subject.should be_valid }
     end
 
-    context "InValid ISBN Length" do
-		  let(:invalid_isbn_length) { FactoryGirl.attributes_for(:book, isbn: Forgery::Basic.text(exactly: 12)) }
-		  subject { Book.new(invalid_isbn_length) }
-      it { subject.valid?.should_not be_true }
+    context "InValid ISBN" do
+		  let(:book) { FactoryGirl.build(:book, isbn: Forgery::Basic.text(exactly: 12).to_s) }
+		  subject { book }
+      it { subject.should_not be_valid }
     end
   end
 end
