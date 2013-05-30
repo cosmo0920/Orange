@@ -6,6 +6,6 @@ describe BooksController do
 		visit books_path
 	end
 
-	it { page.should have_selector('table tr') }
+	it { page.should have_selector('body table tr') }
 	it { page.should have_content(book.title) }
 end
