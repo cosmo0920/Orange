@@ -30,4 +30,12 @@ describe BooksController do
       it { assigns(:books).count.should eq 2 }
     end
   end
+  describe "GET new_book_path" do
+    let!(:books) { FactoryGirl.create(:book) }
+    before do
+      get :new
+    end
+    it { response.should be_success }
+
+  end
 end

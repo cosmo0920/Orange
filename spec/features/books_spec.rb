@@ -25,5 +25,16 @@ describe BooksController do
       end
       it { page.should_not have_css('nav.pagination') }
     end
+    context "page should have submit button" do
+      let!(:book) { FactoryGirl.create_list(:book,1) }
+      before do
+        visit new_book_path
+      end
+      it "should redirect_to books_path after click" do
+        click_button("Create Book")
+        current_path.should == books_path
+      end
+    end
+
   end
 end
