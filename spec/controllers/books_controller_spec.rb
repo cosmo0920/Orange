@@ -38,4 +38,19 @@ describe BooksController do
     it { response.should be_success }
 
   end
+
+  describe "POST /books" do
+    before do
+      @book_count = Book.count
+      post :create, book: { isbn: 9784797363821 }
+    end
+
+    it "creates a new book" do
+      Book.count.should == @book_count + 1
+    end
+
+    it "redirects to books_path" do
+      response.should redirect_to(books_path)
+    end
+  end
 end

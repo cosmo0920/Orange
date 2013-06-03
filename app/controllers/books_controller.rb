@@ -8,6 +8,23 @@ class BooksController < ApplicationController
   end
 
   def create
-    redirect_to books_path
+    @book = Book.new(create_book_params)
+    @book.title = "Book"
+    @book.description = "book description"
+    @book.image_url = ""
+    if @book.save
+      respond_to do |format|
+        format.html { redirect_to books_path, notice: 'success: add book' }
+      end
+    else
+      respond_to do |format|
+        format.html { redirect_to books_path, notice: 'error: add book' }
+      end
+    end
+  end
+
+  private
+  def create_book_params
+    params.require(:book).permit(:isbn)
   end
 end
