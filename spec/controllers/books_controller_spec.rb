@@ -40,17 +40,21 @@ describe BooksController do
   end
 
   describe "POST /books" do
-    before do
-      @book_count = Book.count
-      post :create, book: { isbn: 9784797363821 }
-    end
+    let!(:book) { FactoryGirl.create(:book) }
+    let!(:isbn13) { 9784797363821 }
+    context "create book" do
+      before do
+        @book_count = Book.count
+        post :create, book: { isbn: isbn13 }
+      end
 
-    it "creates a new book" do
-      Book.count.should == @book_count + 1
-    end
+      it "creates a new book" do
+        Book.count.should == @book_count + 1
+      end
 
-    it "redirects to books_path" do
-      response.should redirect_to(books_path)
+      it "redirects to books_path" do
+        response.should redirect_to(books_path)
+      end
     end
   end
 end

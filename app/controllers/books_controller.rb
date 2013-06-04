@@ -9,9 +9,7 @@ class BooksController < ApplicationController
 
   def create
     @book = Book.new(create_book_params)
-    @book.title = "Book"
-    @book.description = "book description"
-    @book.image_url = ""
+    get_book_info
     if @book.save
       respond_to do |format|
         format.html { redirect_to books_path, notice: 'success: add book' }
@@ -26,5 +24,11 @@ class BooksController < ApplicationController
   private
   def create_book_params
     params.require(:book).permit(:isbn)
+  end
+
+  def get_book_info
+    @book.title = "Book #{Time.now}"
+    @book.description = "book description"
+    @book.image_url = ""
   end
 end
