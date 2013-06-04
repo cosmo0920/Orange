@@ -1,6 +1,10 @@
 GEM
   remote: https://rubygems.org/
   specs:
+    a2z (0.1.1)
+      crack
+      jeff
+      money
     actionmailer (4.0.0.rc1)
       actionpack (= 4.0.0.rc1)
       mail (~> 2.5.3)
@@ -46,9 +50,11 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.6.2)
+    crack (0.3.2)
     database_cleaner (1.0.1)
     diff-lcs (1.2.4)
     erubis (2.7.0)
+    excon (0.22.1)
     execjs (1.4.0)
       multi_json (~> 1.0)
     factory_girl (4.2.0)
@@ -73,6 +79,8 @@ GEM
       activerecord (>= 3)
     jbuilder (1.0.2)
       activesupport (>= 3.0.0)
+    jeff (0.6.3)
+      excon (~> 0.22.0)
     jquery-rails (3.0.0)
       railties (>= 3.0, < 5.0)
       thor (>= 0.14, < 2.0)
@@ -90,6 +98,8 @@ GEM
     method_source (0.8.1)
     mime-types (1.23)
     minitest (4.7.4)
+    money (5.1.1)
+      i18n (~> 0.6.0)
     multi_json (1.7.5)
     multipart-post (1.2.0)
     named_let (0.1.5)
@@ -198,6 +208,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  a2z
   bcrypt-ruby (~> 3.0.0)
   capybara
   capybara-webkit
