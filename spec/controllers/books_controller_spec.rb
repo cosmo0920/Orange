@@ -42,7 +42,7 @@ describe BooksController do
   describe "POST /books" do
     let!(:book) { FactoryGirl.create(:book) }
     let!(:isbn13) { 9784797363821 }
-    context "create book" do
+    context "create book isbn13" do
       before do
         @book_count = Book.count
         post :create, book: { isbn: isbn13 }
