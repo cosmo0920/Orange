@@ -4,4 +4,5 @@ env: DB=sqlite
 bundler_args: --binstubs --without development:production
 before_install: gem update bundler
 before_script:
+  - mv config/amazon_dummy.yml config/amazon.yml
   - RAILS_ENV=test rake db:create db:test:load --quiet
