@@ -1,6 +1,8 @@
 require 'spec_helper'
 
 describe Book do
+  include_context "amazon_api_mock"
+
 	describe "pagination" do
 		before { FactoryGirl.create_list(:book,12) }
 
@@ -14,6 +16,7 @@ describe Book do
 			it { subject.count.should eq 2 }
 		end
 	end
+
   describe "validation" do
     describe "isbn_is_appropriate" do
       context "valid ISBN13" do
@@ -34,7 +37,17 @@ describe Book do
         it { subject.should_not be_valid }
       end
     end
+  end
 
-    it { should ensure_length_of(:image_url).is_at_most(2048) }
+  describe "#isbn_type" do
+    context 'EAN' do
+      let(:book) { FactoryGirl.build(:book, isbn: "9784797363821") }
+      it { expect(book.isbn_type).to eq("EAN") }
+    end
+
+    context 'ISBN' do
+	  	let(:book) { FactoryGirl.build(:book, isbn: "4894717115") }
+      it { expect(book.isbn_type).to eq("ISBN") }
+    end
   end
 end

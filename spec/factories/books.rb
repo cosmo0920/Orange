@@ -4,6 +4,7 @@ FactoryGirl.define do
   factory :book do
 		title { Forgery::Basic.text }
 		isbn { "9784274068669" }
+		image_url { Forgery::Basic.text }
 		description { Forgery::Basic.text }
   end
 end

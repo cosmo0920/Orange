@@ -10,13 +10,9 @@ class BooksController < ApplicationController
   def create
     @book = Book.new(create_book_params)
     if @book.save
-      respond_to do |format|
-        format.html { redirect_to books_path, notice: 'success: add book' }
-      end
+      redirect_to books_path, notice: 'success: add book'
     else
-      respond_to do |format|
-        format.html { redirect_to books_path, notice: 'error: add book' }
-      end
+      render :new
     end
   end
 

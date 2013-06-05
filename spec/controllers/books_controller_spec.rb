@@ -1,6 +1,7 @@
 require 'spec_helper'
 
 describe BooksController do
+  include_context "amazon_api_mock"
 
   describe "GET 'index'" do
 		let!(:books) { FactoryGirl.create_list(:book, 2) }
@@ -30,30 +31,37 @@ describe BooksController do
       it { assigns(:books).count.should eq 2 }
     end
   end
+
   describe "GET new_book_path" do
     let!(:books) { FactoryGirl.create(:book) }
     before do
       get :new
     end
     it { response.should be_success }
-
   end
 
   describe "POST /books" do
-    let!(:book) { FactoryGirl.create(:book) }
-    let!(:isbn13) { 9784797363821 }
-    context "create book isbn13" do
-      before do
-        @book_count = Book.count
-        post :create, book: { isbn: isbn13 }
-      end
-
+    context "valid params" do
+      let(:book) { FactoryGirl.attributes_for(:book) }
       it "creates a new book" do
-        Book.count.should == @book_count + 1
+        expect { post :create, book: book }.to change{ Book.count }.by(1)
       end
 
       it "redirects to books_path" do
+        post :create, book: book
         response.should redirect_to(books_path)
+      end
+    end
+
+    context "invalid params" do
+      let(:book) { FactoryGirl.attributes_for(:book, isbn: nil) }
+      it "creates a new book" do
+        expect { post :create, book: book }.to change{ Book.count }.by(0)
+      end
+
+      it "redirects to books_path" do
+        post :create, book: book
+        expect(response).to render_template(:new)
       end
     end
   end
