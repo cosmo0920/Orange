@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 shared_context "amazon_api_mock" do
   before do
     Amazon.any_instance.stub(:book_title) { "列車本" }

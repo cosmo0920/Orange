@@ -1,9 +1,9 @@
 = form_for(@books) do |f|
   .field
     = f.label :isbn
-    <br />
+    %br
     = f.text_field :isbn
   .actions
-    = f.submit
+    = f.submit "Add Book"
 
 = link_to 'Back', books_path

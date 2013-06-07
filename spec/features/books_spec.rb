@@ -3,15 +3,16 @@ require 'spec_helper'
 describe BooksController do
   include_context "amazon_api_mock"
 
-  describe "page should contain book title" do
-    let(:book) { FactoryGirl.create(:book) }
+  describe "page should contain book title and img" do
+     let!(:book) { FactoryGirl.create(:book) }
 
     before do
       visit books_path
     end
 
-    pending { page.should have_css('#booklist') }
-    pending { page.find('#booklist').should have_content(book.title) }
+    it { page.should have_css('#booklist') }
+    it { page.find('#booklist').should have_content(book.title) }
+    it { page.should have_css("#book_image") }
   end
 
   describe "paginator" do
@@ -20,7 +21,7 @@ describe BooksController do
       before do
         visit books_path
       end
-      pending { page.should have_css('nav.pagination') }
+      it { page.should have_css('nav.pagination') }
     end
 
     context "page should not have nav seletor when book.count <= 10" do
@@ -28,19 +29,19 @@ describe BooksController do
       before do
         visit books_path
       end
-      pending { page.should_not have_css('nav.pagination') }
+      it { page.should_not have_css('nav.pagination') }
     end
   end
 
   describe "page should have submit button" do
-    let(:book) { FactoryGirl.create(:book) }
-
+    let(:isbn) { '9784274068669' }
     before do
       visit new_book_path
-      click_button("Create Book")
+      fill_in 'book_isbn', with: isbn
+      click_button("Add Book")
     end
 
-    pending "should redirect_to books_path after click" do
+    it "should redirect_to books_path after click" do
       current_path.should == books_path
     end
   end
