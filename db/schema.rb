@@ -11,15 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130522075636) do
+ActiveRecord::Schema.define(version: 20130607023346) do
 
   create_table "books", force: true do |t|
-    t.string   "title",                    null: false
-    t.text     "description",              null: false
-    t.string   "isbn",        limit: 13,   null: false
+    t.string   "title",                   null: false
+    t.string   "isbn",       limit: 13,   null: false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "image_url",   limit: 2048
+    t.string   "image_url",  limit: 2048
   end
 
   create_table "users", force: true do |t|

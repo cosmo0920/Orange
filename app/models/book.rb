@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 class Book < ActiveRecord::Base
   paginates_per 10
   validates :isbn, isbn_format: true
@@ -21,6 +22,5 @@ class Book < ActiveRecord::Base
     amazon = Amazon.new(isbn, isbn_type)
     self.title = amazon.book_title
     self.image_url = amazon.book_image_url
-    self.description = ""
   end
 end
