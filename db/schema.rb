@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130607023346) do
+ActiveRecord::Schema.define(version: 20130611050814) do
 
   create_table "books", force: true do |t|
     t.string   "title",                   null: false
@@ -20,6 +20,8 @@ ActiveRecord::Schema.define(version: 20130607023346) do
     t.datetime "updated_at"
     t.string   "image_url",  limit: 2048
   end
+
+  add_index "books", ["isbn"], name: "index_books_on_isbn", unique: true
 
   create_table "users", force: true do |t|
     t.string   "provider"

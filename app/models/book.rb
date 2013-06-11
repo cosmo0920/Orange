@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 class Book < ActiveRecord::Base
   paginates_per 10
-  validates :isbn, isbn_format: true
+  validates :isbn, isbn_format: true , uniqueness: :isbn
   # Internet ExplorerではGETで2048文字を超えるURLがエラーになるため
   #validates :image_url, length: { maximum: 2048 }
   before_save :get_book_info
