@@ -33,7 +33,7 @@ describe BooksController do
   end
 
   describe "GET new_book_path" do
-    let!(:books) { FactoryGirl.create(:book) }
+    let!(:book) { FactoryGirl.create(:book) }
     before do
       get :new
     end
