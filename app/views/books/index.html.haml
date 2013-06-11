@@ -7,6 +7,6 @@
   - @books.each do |book|
     %tr
       %td
-        %img#book_image(src="#{book.image_url}")
+        %img.book_image(src="#{book.image_url}")
       %td=book.title
 = paginate @books

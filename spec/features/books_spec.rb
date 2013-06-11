@@ -12,7 +12,7 @@ describe BooksController do
 
     it { page.should have_css('#booklist') }
     it { page.find('#booklist').should have_content(book.title) }
-    it { page.should have_css("#book_image") }
+    it { page.should have_css(".book_image") }
   end
 
   describe "paginator" do
