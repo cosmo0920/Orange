@@ -42,7 +42,7 @@ describe BooksController do
     end
 
     it "should redirect_to books_path after click" do
-      current_path.should == books_path
+      current_path.should eq(books_path)
     end
   end
 end
