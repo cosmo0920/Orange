@@ -20,3 +20,5 @@ tmp
 vendor/*
 *.swp
 *.keep
+#for AWS advertising API
+config/amazon.yml

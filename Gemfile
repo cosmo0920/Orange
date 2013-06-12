@@ -35,6 +35,7 @@ gem 'rails-i18n'
 gem 'twitter-bootstrap-rails'
 gem 'kaminari'
 gem 'isbn_validation'
+gem 'a2z'
 
 #group :doc do
 #  # bundle exec rake doc:rails generates the API under doc/api.
