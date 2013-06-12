@@ -4,7 +4,8 @@ class Book < ActiveRecord::Base
   validates :isbn, isbn_format: true , uniqueness: true
   # Internet ExplorerではGETで2048文字を超えるURLがエラーになるため
   #validates :image_url, length: { maximum: 2048 }
-  before_save :get_book_info
+  before_save :amazon_title
+  before_save :amazon_image_url
 
   def isbn_type
     case isbn.try(:size)
@@ -18,9 +19,15 @@ class Book < ActiveRecord::Base
   end
 
   private
-  def get_book_info #TODO: 名前を変更する
-    amazon = Amazon.new(isbn, isbn_type)
+  def amazon
+    @amazon ||= Amazon.new(isbn, isbn_type)
+  end
+
+  def amazon_title
     self.title = amazon.book_title
+  end
+
+  def amazon_image_url
     self.image_url = amazon.book_image_url
   end
 end
