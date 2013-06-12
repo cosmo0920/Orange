@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 require 'spec_helper'
 
 unless ENV['CI']
@@ -7,6 +8,7 @@ unless ENV['CI']
     let(:amazon) {  Amazon.new(isbn, isbn_type) }
     named_let(:image_url) { 'http://ecx.images-amazon.com/images/I/51Gibg-iYTL._SL75_.jpg' }
 
+    #TODO: Webmockを利用した実装にこれらテスト２つを修正する
     describe "#book_title" do
       it { expect(amazon.book_title).to match(/Rails/) }
     end
