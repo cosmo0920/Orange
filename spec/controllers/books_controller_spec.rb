@@ -90,4 +90,14 @@ describe BooksController do
       it { expect(response).to render_template(:edit) }
     end
   end
+
+  describe "DELETE book_path with id" do
+    let!(:books) { FactoryGirl.create_list(:book, 3) }
+    subject do
+      delete :destroy, id: 1
+    end
+
+    it { response.should be_success }
+    it { subject.should be_success }
+  end
 end
