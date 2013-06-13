@@ -86,5 +86,26 @@ describe BooksController do
     end
  
     specify { current_path.should == edit_book_path(book.id) }
-   end  
+  end
+
+  describe "page should contain delete" do
+    let!(:book) { FactoryGirl.create(:book) }
+
+    before do
+      visit books_path
+    end
+
+    it { page.should have_selector('a', :text => 'Delete') }
+  end
+
+  describe "after click delete linck should redirect to books_path" do
+    let!(:book) { FactoryGirl.create(:book) }
+
+    before do
+      visit books_path
+      click_link('Delete')
+    end
+
+    specify { current_path.should eq(books_path) }
+  end
 end

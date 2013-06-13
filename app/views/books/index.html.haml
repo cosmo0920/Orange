@@ -11,4 +11,6 @@
         alt: book.title,  class: "book_image"
       %td=book.title
       %td=link_to 'Edit', edit_book_path(book.id)
+      %td=link_to 'Delete', book, method: :delete, data: { confirm: 'Are you sure?' }
+
 = paginate @books
