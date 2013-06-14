@@ -20,8 +20,21 @@ class BooksController < ApplicationController
     @book = Book.find(params[:id])
   end
 
+  def update
+    @book = Book.find(params[:id])
+    if @book.update_columns(update_book_params)
+      redirect_to books_path, notice: 'update book'
+    else
+      render :edit
+    end
+  end
+
   private
   def create_book_params
     params.require(:book).permit(:isbn)
+  end
+
+  def update_book_params
+    params.require(:book).permit(:title, :image_url)
   end
 end

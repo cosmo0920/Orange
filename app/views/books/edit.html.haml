@@ -1,0 +1,17 @@
+= form_for(@book) do |f|
+  .field
+    = f.label :title
+    %br
+    = f.text_field :title
+    %br
+    = f.label :isbn
+    %br
+    = f.text_field :isbn, disabled: true
+    %br
+    = f.label :image_url
+    %br
+    = f.text_field :image_url
+    .actions
+      = f.submit "Update Book"
+
+= link_to 'Back', books_path 

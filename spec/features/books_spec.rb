@@ -55,4 +55,18 @@ describe BooksController do
 
     it { page.should have_selector('a', :text => 'Edit') }
   end
+
+  describe "page should contain edit result" do
+    let!(:book) { FactoryGirl.create(:book) }
+
+    before do
+      visit edit_book_path(id: 1)
+      fill_in 'book_title', with: "modified:#{book.title}"
+      fill_in 'book_image_url', with: "[update] #{book.image_url}"
+      click_button("Update Book")
+    end
+
+    it { page.should have_content(book.title) }
+    it { page.should have_image(book.image_url) }
+  end
 end
