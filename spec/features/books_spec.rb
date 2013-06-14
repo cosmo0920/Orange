@@ -69,4 +69,15 @@ describe BooksController do
     it { page.should have_content(book.title) }
     it { page.should have_image(book.image_url) }
   end
+
+  describe "after click img, current_path == edit_book_path[:id]" do
+    let!(:book) { FactoryGirl.create(:book) }
+ 
+    before do
+      visit books_path
+      page.find(:css, '.book_image').click
+    end
+ 
+    it { current_path == edit_book_path(book.id) }
+   end  
 end
