@@ -58,6 +58,11 @@ describe BooksController do
 
   describe "page should contain edit result" do
     let!(:book) { FactoryGirl.create(:book) }
+    let(:update_book) {
+      FactoryGirl.build(:book,
+                        title: "modified:#{book.title}",
+                        image_url:"[update] #{book.image_url}")
+    }
 
     before do
       visit edit_book_path(id: 1)
@@ -66,8 +71,8 @@ describe BooksController do
       click_button("Update Book")
     end
 
-    it { page.should have_content(book.title) }
-    it { page.should have_image(book.image_url) }
+    it { page.should have_content(update_book.title) }
+    it { page.should have_image(update_book.image_url) }
   end
 
   describe "after click img, current_path == edit_book_path[:id]" do
