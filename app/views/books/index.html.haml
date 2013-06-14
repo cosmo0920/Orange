@@ -9,4 +9,5 @@
       %td
         %img.book_image(src="#{book.image_url}")
       %td=book.title
+      %td=link_to 'Edit', edit_book_path(book.id)
 = paginate @books

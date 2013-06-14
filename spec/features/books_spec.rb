@@ -45,4 +45,14 @@ describe BooksController do
       current_path.should eq(books_path)
     end
   end
+
+  describe "page should contain edit" do
+    let!(:book) { FactoryGirl.create(:book) }
+
+    before do
+      visit books_path
+    end
+
+    it { page.should have_selector('a', :text => 'Edit') }
+  end
 end
