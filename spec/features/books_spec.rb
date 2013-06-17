@@ -57,7 +57,7 @@ describe BooksController do
   end
 
   describe "page should contain edit result" do
-    let(:book) { FactoryGirl.create(:book) }
+    let!(:book) { FactoryGirl.create(:book) }
     let(:update_book) {
       FactoryGirl.build(:book,
                         title: "modified:#{book.title}",

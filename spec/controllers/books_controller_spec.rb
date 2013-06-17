@@ -67,7 +67,7 @@ describe BooksController do
   end
 
   describe "GET edit_book_path" do
-    let!(:book) { FactoryGirl.create(:book) }
+    let(:book) { FactoryGirl.create(:book) }
     before do
       get :edit, id: book.id
     end
@@ -76,8 +76,8 @@ describe BooksController do
   end
 
   describe "update book" do
-    let!(:book) { FactoryGirl.create(:book) }
-    let!(:post_book) { FactoryGirl.attributes_for(:book, title: 'title', image_url: 'test.png') }
+    let(:book) { FactoryGirl.create(:book) }
+    let(:post_book) { FactoryGirl.attributes_for(:book, title: 'title', image_url: 'test.png') }
     before do
       get :edit, id: book.id
     end
