@@ -77,19 +77,24 @@ describe BooksController do
 
   describe "update book" do
     let!(:book) { FactoryGirl.create(:book) }
+    let!(:post_book) { FactoryGirl.attributes_for(:book, title: 'title', image_url: 'test.png') }
     before do
       get :edit, id: book.id
     end
 
-    it "POST books_path with valid params" do
-      post :update, id: book.id, book: {title: 'title', image_url: 'test.png' }
-      response.should redirect_to(books_path)
+    context "POST books_path" do
+      it "update book with valid params" do
+        post :update, id: book.id, book: post_book
+        response.should redirect_to(books_path)
+      end
     end
 
-    it "POST books_path with invalid params" do
-      expect {
-        post(:update, id: book.id, book: {})
-      }.to raise_error ActionController::ParameterMissing
+    context "POST books_path" do
+      it "update book with invalid params" do
+        expect {
+          post(:update, id: book.id, book: {})
+        }.to raise_error ActionController::ParameterMissing
+      end
     end
   end
 end
