@@ -83,6 +83,6 @@ describe BooksController do
       page.find(:css, '.book_image').click
     end
  
-    it { current_path == edit_book_path(book.id) }
+    specify { current_path.should == edit_book_path(book.id) }
    end  
 end
