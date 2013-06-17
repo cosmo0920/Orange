@@ -46,14 +46,14 @@ describe BooksController do
     end
   end
 
-  describe "page should contain edit" do
+  describe "page should contain link_to edit_book_path" do
     let!(:book) { FactoryGirl.create(:book) }
 
     before do
       visit books_path
     end
 
-    it { page.should have_selector('a', :text => 'Edit') }
+    it { page.should have_selector('a', text: 'Edit') }
   end
 
   describe "page should contain edit result" do
