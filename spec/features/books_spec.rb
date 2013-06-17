@@ -57,7 +57,7 @@ describe BooksController do
   end
 
   describe "page should contain edit result" do
-    let!(:book) { FactoryGirl.create(:book) }
+    let(:book) { FactoryGirl.create(:book) }
     let(:update_book) {
       FactoryGirl.build(:book,
                         title: "modified:#{book.title}",
@@ -65,7 +65,7 @@ describe BooksController do
     }
 
     before do
-      visit edit_book_path(id: 1)
+      visit edit_book_path(id: book.id)
       fill_in 'book_title', with: "modified:#{book.title}"
       fill_in 'book_image_url', with: "[update] #{book.image_url}"
       click_button("Update Book")
