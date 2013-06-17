@@ -71,8 +71,10 @@ describe BooksController do
       click_button("Update Book")
     end
 
-    it { page.should have_content(update_book.title) }
-    it { page.should have_image(update_book.image_url) }
+    subject { page }
+
+    it { should have_content(update_book.title) }
+    it { should have_image(update_book.image_url) }
   end
 
   describe "after click img, current_path == edit_book_path[:id]" do
