@@ -82,19 +82,28 @@ describe BooksController do
       get :edit, id: book.id
     end
 
-    context "POST books_path" do
-      it "update book with valid params" do
+    context "when params are valid" do
+      it "redirects to book path" do
         post :update, id: book.id, book: post_book
         response.should redirect_to(books_path)
       end
     end
 
-    context "POST books_path" do
-      it "update book with invalid params" do
-        expect {
-          post(:update, id: book.id, book: {})
-        }.to raise_error ActionController::ParameterMissing
+    context "when book cannot save" do
+      let!(:save_book) do
+        mock_model Book, book: post_book,
+                         save: true,
+                         update_columns: false
       end
+
+      it "supports stubs for methods that do exist" do
+        save_book.save.should be_true
+        save_book.update_columns.should be_false
+      end
+
+      it "render edit template" do
+        response.should render_template("edit")
+      end      
     end
   end
 end
