@@ -22,7 +22,7 @@ class BooksController < ApplicationController
 
   def update
     @book = Book.find(params[:id])
-    if @book.update_columns(update_book_params)
+    if @book.update_attributes(update_book_params)
       redirect_to books_path, notice: 'update book'
     else
       render :edit

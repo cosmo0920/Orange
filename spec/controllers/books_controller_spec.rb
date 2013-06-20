@@ -59,7 +59,7 @@ describe BooksController do
         expect { post :create, book: book }.to change{ Book.count }.by(0)
       end
 
-      it "redirects to books_path" do
+      it "redirects to edit_book_path" do
         post :create, book: book
         expect(response).to render_template(:new)
       end
@@ -75,35 +75,19 @@ describe BooksController do
     it { response.should be_success }
   end
 
-  describe "update book" do
-    let(:book) { FactoryGirl.create(:book) }
-    let(:post_book) { FactoryGirl.attributes_for(:book, title: 'title', image_url: 'test.png') }
-    before do
-      get :edit, id: book.id
+  describe "PATCH /books/1" do
+    let!(:book) { FactoryGirl.create(:book) }
+
+    context "valid params" do
+      let(:edited_book) { FactoryGirl.attributes_for(:book) }
+      before { patch :update, id: book.id, book: edited_book }
+      it { response.should redirect_to(books_path) }
     end
 
-    context "when params are valid" do
-      it "redirects to book path" do
-        post :update, id: book.id, book: post_book
-        response.should redirect_to(books_path)
-      end
-    end
-
-    context "when book cannot save" do
-      let!(:save_book) do
-        mock_model Book, book: post_book,
-                         save: true,
-                         update_columns: false
-      end
-
-      it "supports stubs for methods that do exist" do
-        save_book.save.should be_true
-        save_book.update_columns.should be_false
-      end
-
-      it "render edit template" do
-        response.should render_template("edit")
-      end      
+    context "invalid params" do
+      let(:edited_book) { FactoryGirl.attributes_for(:book, title: nil) }
+      before { patch :update, id: book.id, book: edited_book }
+      it { expect(response).to render_template(:edit) }
     end
   end
 end
