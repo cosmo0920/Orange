@@ -59,10 +59,35 @@ describe BooksController do
         expect { post :create, book: book }.to change{ Book.count }.by(0)
       end
 
-      it "redirects to books_path" do
+      it "redirects to edit_book_path" do
         post :create, book: book
         expect(response).to render_template(:new)
       end
+    end
+  end
+
+  describe "GET edit_book_path" do
+    let(:book) { FactoryGirl.create(:book) }
+    before do
+      get :edit, id: book.id
+    end
+
+    it { response.should be_success }
+  end
+
+  describe "PATCH /books/1" do
+    let!(:book) { FactoryGirl.create(:book) }
+
+    context "valid params" do
+      let(:edited_book) { FactoryGirl.attributes_for(:book) }
+      before { patch :update, id: book.id, book: edited_book }
+      it { response.should redirect_to(books_path) }
+    end
+
+    context "invalid params" do
+      let(:edited_book) { FactoryGirl.attributes_for(:book, title: nil) }
+      before { patch :update, id: book.id, book: edited_book }
+      it { expect(response).to render_template(:edit) }
     end
   end
 end

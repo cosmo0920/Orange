@@ -45,4 +45,46 @@ describe BooksController do
       current_path.should eq(books_path)
     end
   end
+
+  describe "page should contain link_to edit_book_path" do
+    let!(:book) { FactoryGirl.create(:book) }
+
+    before do
+      visit books_path
+    end
+
+    it { page.should have_selector('a', text: 'Edit') }
+  end
+
+  describe "page should contain edit result" do
+    let(:book) { FactoryGirl.create(:book) }
+    let(:update_book) {
+      FactoryGirl.build(:book,
+                        title: "modified:#{book.title}",
+                        image_url:"[update] #{book.image_url}")
+    }
+
+    before do
+      visit edit_book_path(id: book.id)
+      fill_in 'book_title', with: "modified:#{book.title}"
+      fill_in 'book_image_url', with: "[update] #{book.image_url}"
+      click_button("Update Book")
+    end
+
+    subject { page }
+
+    it { should have_content(update_book.title) }
+    it { should have_image(update_book.image_url) }
+  end
+
+  describe "after click img, current_path == edit_book_path[:id]" do
+    let!(:book) { FactoryGirl.create(:book) }
+ 
+    before do
+      visit books_path
+      page.find(:css, '.book_image').click
+    end
+ 
+    specify { current_path.should == edit_book_path(book.id) }
+   end  
 end

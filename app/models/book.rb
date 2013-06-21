@@ -2,10 +2,11 @@
 class Book < ActiveRecord::Base
   paginates_per 10
   validates :isbn, isbn_format: true , uniqueness: true
+  validates :title, presence: true, on: :update
   # Internet ExplorerではGETで2048文字を超えるURLがエラーになるため
   #validates :image_url, length: { maximum: 2048 }
-  before_save :amazon_title
-  before_save :amazon_image_url
+  before_create :amazon_title
+  before_create :amazon_image_url
 
   def isbn_type
     case isbn.try(:size)
