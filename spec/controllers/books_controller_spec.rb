@@ -91,19 +91,17 @@ describe BooksController do
     end
   end
 
-  describe "DELETE book_path" do
-    let!(:books) { FactoryGirl.create_list(:book, 2) }
-    subject do
-      delete :destroy, id: 1
-    end
+  describe "DELETE /books/1" do
+    let(:book) { FactoryGirl.create(:book) }
+    subject { delete :destroy, id: book.id }
 
     it { response.should be_success }
-    it { subject.should be_redirect }
+    it { subject.should redirect_to(books_path) }
   end
 
-  describe "DELETE book_path should be Book#count -1" do
-    let!(:books) { FactoryGirl.create(:book) }
+  describe "DELETE /books/1 should be Book#count -1" do
+    let!(:book) { FactoryGirl.create(:book) }
 
-    it { expect { delete :destroy, id: 1 }.to change(Book, :count).by(-1) }
+    it { expect { delete :destroy, id: book.id }.to change(Book, :count).by(-1) }
   end
 end
