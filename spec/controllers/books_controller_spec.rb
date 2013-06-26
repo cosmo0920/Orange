@@ -90,4 +90,18 @@ describe BooksController do
       it { expect(response).to render_template(:edit) }
     end
   end
+
+  describe "DELETE /books/1" do
+    let(:book) { FactoryGirl.create(:book) }
+    subject { delete :destroy, id: book.id }
+
+    it { response.should be_success }
+    it { subject.should redirect_to(books_path) }
+  end
+
+  describe "DELETE /books/1 should be Book#count -1" do
+    let!(:book) { FactoryGirl.create(:book) }
+
+    it { expect { delete :destroy, id: book.id }.to change(Book, :count).by(-1) }
+  end
 end
