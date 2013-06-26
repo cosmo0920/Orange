@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 require 'spec_helper'
 
 describe BooksController do
@@ -103,5 +104,23 @@ describe BooksController do
     let!(:book) { FactoryGirl.create(:book) }
 
     it { expect { delete :destroy, id: book.id }.to change(Book, :count).by(-1) }
+  end
+
+  describe "POST /books/search/#format"do
+    named_let(:search_book_title) { '列車本' }
+    context "when book found" do
+      let(:book) { FactoryGirl.create(:book, title: search_book_title) }
+      subject { post :search, title: search_book_title }
+
+      it { response.should be_success }
+    end
+
+    context "when book not found" do
+      let(:book) { FactoryGirl.create(:book) }
+      subject { post :search, title: nil }
+
+      it { response.should be_success }
+      it { subject.should redirect_to(books_path) }
+    end
   end
 end
