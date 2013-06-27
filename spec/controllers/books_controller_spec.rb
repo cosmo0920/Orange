@@ -113,6 +113,7 @@ describe BooksController do
       subject { post :search, title: search_book_title }
 
       it { response.should be_success }
+      it { expect(subject).to render_template(:search) }
     end
 
     context "when book not found" do
@@ -120,7 +121,7 @@ describe BooksController do
       subject { post :search, title: nil }
 
       it { response.should be_success }
-      it { subject.should redirect_to(books_path) }
+      it { expect(subject).to redirect_to(books_path) }
     end
   end
 end

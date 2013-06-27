@@ -36,9 +36,8 @@ class BooksController < ApplicationController
   end
 
   def search
-    unless params[:book].blank?
-      @books = Book.where(["title LIKE ?", "%#{params[:book]}%"])
-      render :search
+    unless params[:title].blank?
+      @books = Book.where(["title LIKE ?", "%#{params[:title]}%"])
     else
       redirect_to books_path, notice: 'not found'
     end

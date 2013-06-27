@@ -115,7 +115,7 @@ describe BooksController do
 
     before do
       visit books_path
-      fill_in 'book', with: "列車本"
+      fill_in 'title', with: "列車本"
       click_button('search')
     end
 
@@ -127,7 +127,7 @@ describe BooksController do
 
     before do
       visit books_path
-      fill_in 'book', with: "列車本"
+      fill_in 'title', with: "列車本"
       click_button('search')
     end
 
