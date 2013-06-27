@@ -8,6 +8,8 @@ class Book < ActiveRecord::Base
   before_create :amazon_title
   before_create :amazon_image_url
 
+  scope :search, lambda {|title| where(["title LIKE ?", "%#{title}%"])}
+
   def isbn_type
     case isbn.try(:size)
     when 10

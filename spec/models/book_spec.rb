@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 require 'spec_helper'
 
 describe Book do
@@ -48,6 +49,35 @@ describe Book do
     context 'ISBN' do
 	  	let(:book) { FactoryGirl.build(:book, isbn: "4894717115") }
       it { expect(book.isbn_type).to eq("ISBN") }
+    end
+  end
+
+  describe ".search" do
+    context "when exact match title" do
+      named_let(:search_title) { "列車本" }
+      let!(:book) { FactoryGirl.create(:book, title: search_title) }
+      subject { Book.search(search_title) }
+
+      it { subject.first.title.should eq(search_title) }
+    end
+
+    context "when partialliy match title" do
+      named_let(:search_title_partial) { "列車" }
+      named_let(:search_title) { "列車本" }
+      let!(:book) { FactoryGirl.create(:book, title: search_title) }
+      subject { Book.search(search_title_partial) }
+
+      it { subject.first.title.should eq(search_title) }
+    end
+
+    context "when no result" do
+      named_let(:search_title_no_match) { "Rails" }
+      named_let(:search_title) { "列車本" }
+      named_let(:no_result) { [] }
+      let!(:book) { FactoryGirl.create(:book, title: search_title) }
+      subject { Book.search(search_title_no_match) }
+
+      it { subject.should eq(no_result) }
     end
   end
 end
