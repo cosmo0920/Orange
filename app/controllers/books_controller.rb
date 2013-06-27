@@ -36,11 +36,9 @@ class BooksController < ApplicationController
   end
 
   def search
-    unless params[:title].blank?
-      @books = Book.search(params[:title])
-    else
-      redirect_to books_path, notice: 'not found'
-    end
+    redirect_to books_path, notice: "Not Found" and return if params[:title].blank?
+
+    @books = Book.search(params[:title])
   end
 
   private

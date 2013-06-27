@@ -106,11 +106,11 @@ describe BooksController do
     it { expect { delete :destroy, id: book.id }.to change(Book, :count).by(-1) }
   end
 
-  describe "POST /books/search/#format"do
+  describe "GET /books/search/#format"do
     named_let(:search_book_title) { '列車本' }
     context "when book found" do
       let(:book) { FactoryGirl.create(:book, title: search_book_title) }
-      subject { post :search, title: search_book_title }
+      subject { get :search, title: search_book_title }
 
       it { response.should be_success }
       it { expect(subject).to render_template(:search) }
@@ -118,7 +118,7 @@ describe BooksController do
 
     context "when book not found" do
       let(:book) { FactoryGirl.create(:book) }
-      subject { post :search, title: nil }
+      subject { get :search, title: nil }
 
       it { response.should be_success }
       it { expect(subject).to redirect_to(books_path) }

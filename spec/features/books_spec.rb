@@ -119,7 +119,7 @@ describe BooksController do
       click_button('search')
     end
 
-    specify { current_path.should eq(search_path) }
+    specify { current_path.should eq(search_books_path) }
   end
 
   describe "search page should contain" do
