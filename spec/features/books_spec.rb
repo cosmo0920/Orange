@@ -110,19 +110,7 @@ describe BooksController do
     specify { current_path.should eq(books_path) }
   end
 
-  describe "after click search button should go to search_path" do
-    let!(:book) { FactoryGirl.create(:book) }
-
-    before do
-      visit books_path
-      fill_in 'title', with: "列車本"
-      click_button('search')
-    end
-
-    specify { current_path.should eq(search_books_path) }
-  end
-
-  describe "search page should contain" do
+  describe "search page should contain search result" do
     let!(:book) { FactoryGirl.create(:book) }
 
     before do
@@ -132,6 +120,8 @@ describe BooksController do
     end
 
     subject { page }
+
+    specify { current_path.should eq(search_books_path) }
     it { should have_selector('h3', :text => 'Search Result') }
     it { should have_content(book.title) }
     it { should have_image(book.image_url) }

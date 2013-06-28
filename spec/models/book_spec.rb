@@ -73,11 +73,11 @@ describe Book do
     context "when no result" do
       named_let(:search_title_no_match) { "Rails" }
       named_let(:search_title) { "列車本" }
-      named_let(:no_result) { [] }
+      named_let(:no_result) { Book.none }
       let!(:book) { FactoryGirl.create(:book, title: search_title) }
       subject { Book.search(search_title_no_match) }
 
-      it { subject.should eq(no_result) }
+      it { subject.should match_array(no_result) }
     end
   end
 end
