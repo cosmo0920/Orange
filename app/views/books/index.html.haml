@@ -3,6 +3,11 @@
 
 = link_to 'Add Book', new_book_path
 
+= form_tag({action: :search},{ method: :get})
+= label_tag :search_title
+= text_field_tag :title
+= submit_tag "search"
+
 %table#booklist
   - @books.each do |book|
     %tr

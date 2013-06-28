@@ -1,0 +1,8 @@
+%h3 Search Result
+%table#booklist
+  - @books.each do |book|
+    %tr
+      %td
+        = link_to image_tag(book.image_url, alt: book.image_url), edit_book_path(book),
+        alt: book.title,  class: "book_image"
+      %td=book.title

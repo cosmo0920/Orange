@@ -35,6 +35,12 @@ class BooksController < ApplicationController
     redirect_to books_path, notice: 'delete book'
   end
 
+  def search
+    redirect_to books_path, notice: "Not Found" and return if params[:title].blank?
+
+    @books = Book.search(params[:title])
+  end
+
   private
   def create_book_params
     params.require(:book).permit(:isbn)
